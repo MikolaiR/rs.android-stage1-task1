@@ -3,7 +3,7 @@ package subtask5
 class HighestPalindrome {
 
     fun stringToInt(numberString: String): ArrayList<Int> {
-        var outArray = arrayListOf<Int>()
+        val outArray = arrayListOf<Int>()
         var count = 0
         var numberASCI: Int = 0
         while (count < numberString.length) {
@@ -17,33 +17,40 @@ class HighestPalindrome {
     }
 
     fun highestValuePalindrome(n: Int, k: Int, digitString: String): String {
-        var count = 0
         var output = ""
         var invertNumber = mutableListOf<Int>()
         var originNumber = mutableListOf<Int>()
         originNumber = stringToInt(digitString)
-        invertNumber = originNumber.reversed().toMutableList()
-        var maxValue = originNumber.max()
 
-        while (count <= k) {
-            for (index in 0 until invertNumber.size) {
-                if (invertNumber[index] != originNumber[index] && invertNumber[index] > originNumber[index]) {
-                    if (maxValue != null) {
-                        originNumber[index] = maxValue
-                        invertNumber = originNumber.reversed().toMutableList()
-                        break
-                    }
-                } else if (originNumber == invertNumber) {
+        for (change in 0 until k) {
+            loop@for (index in 0 until n / 2) {
+                if (originNumber[index] != originNumber[n - index - 1] && originNumber[index] < originNumber[n - index - 1]) {
+                    originNumber[index] = originNumber[originNumber.size - index - 1]
+                    invertNumber = originNumber.reversed().toMutableList()
                     break
+                } else if (originNumber[index] != originNumber[n - index - 1] && originNumber[index] > originNumber[n - index - 1]) {
+                    originNumber[n - index - 1] = originNumber[index]
+                    invertNumber = originNumber.reversed().toMutableList()
+                    break
+                } else if (originNumber == invertNumber) {
+                    for (indexMax in 0 until n / 2) {
+                        if (originNumber[indexMax] != 9) {
+                            originNumber[indexMax] = 9
+                            originNumber[n - indexMax - 1] = 9
+                            invertNumber = originNumber.reversed().toMutableList()
+                            break@loop
+                        }
+                    }
                 }
             }
-            count++
         }
+        invertNumber = originNumber.reversed().toMutableList()
         if (originNumber != invertNumber) {
             return "-1"
-        }else {
-            originNumber.forEach{output += it }
+        } else {
+            originNumber.forEach { output += it }
         }
         return output
+
     }
 }
