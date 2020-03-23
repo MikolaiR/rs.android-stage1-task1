@@ -2,62 +2,59 @@ package subtask4
 
 class StringParser {
 
-
     fun getResult(inputString: String): Array<String> {
-        var charArray = charArrayOf()
-        charArray = inputString.toCharArray()
+        var inputChar:CharArray = inputString.toCharArray()
         var outString: ArrayList<String> = arrayListOf()
-            for ((index, char) in charArray.withIndex()) {
+            for ((index, char) in inputChar.withIndex()) {
                 if (char == '<') {
-                    var closeAngelBracket = charArray.indexOf('>')
-                    var str = inputString.substring(index + 1, closeAngelBracket)
-                    var count = str.indexOf('<')
-                    if (closeAngelBracket > 0 && count < 0) {
-                        outString.add(inputString.substring(index + 1, closeAngelBracket))
-                        charArray.set(closeAngelBracket, '-')
+                    var closeBracket = inputChar.indexOf('>')
+                    var processedText = inputString.substring(index + 1, closeBracket)
+                    var count = processedText.indexOf('<')
+                    if (closeBracket > 0 && count < 0) {
+                        outString.add(inputString.substring(index + 1, closeBracket))
+                        inputChar.set(closeBracket, '-')
                     }
-                    if (closeAngelBracket > 0 && count > 0) {
-                        charArray.set(closeAngelBracket,'-')
-                        var nextCloseAngelBracket = charArray.indexOf('>')
+                    if (closeBracket > 0 && count > 0) {
+                        inputChar.set(closeBracket,'-')
+                        var nextCloseAngelBracket = inputChar.indexOf('>')
                         outString.add(inputString.substring(index + 1, nextCloseAngelBracket))
-                        charArray.set(nextCloseAngelBracket, '-')
-                        charArray.set(closeAngelBracket,'>')
+                        inputChar.set(nextCloseAngelBracket, '-')
+                        inputChar.set(closeBracket,'>')
                     }
                 }
 
                 if (char == '[') {
-                    var closeAngelBracket = charArray.indexOf(']')
-                    var str = inputString.substring(index + 1, closeAngelBracket)
-                    var count = str.indexOf('[')
-                    if (closeAngelBracket > 0 && count < 0) {
-                        outString.add(inputString.substring(index + 1, closeAngelBracket))
-                        charArray.set(closeAngelBracket, '-')
+                    var closeBracket = inputChar.indexOf(']')
+                    var processedText = inputString.substring(index + 1, closeBracket)
+                    var count = processedText.indexOf('[')
+                    if (closeBracket > 0 && count < 0) {
+                        outString.add(inputString.substring(index + 1, closeBracket))
+                        inputChar.set(closeBracket, '-')
                     }
-                    if (closeAngelBracket > 0 && count > 0) {
-                        charArray.set(closeAngelBracket,'-')
-                        var nextCloseAngelBracket = charArray.indexOf(']')
+                    if (closeBracket > 0 && count > 0) {
+                        inputChar.set(closeBracket,'-')
+                        var nextCloseAngelBracket = inputChar.indexOf(']')
                         outString.add(inputString.substring(index + 1, nextCloseAngelBracket))
-                        charArray.set(nextCloseAngelBracket, '-')
-                        charArray.set(closeAngelBracket,']')
+                        inputChar.set(nextCloseAngelBracket, '-')
+                        inputChar.set(closeBracket,']')
                     }
                 }
                 if (char == '(') {
-                    var closeAngelBracket = charArray.indexOf(')')
-                    var str = inputString.substring(index + 1, closeAngelBracket)
-                    var count = str.indexOf('(')
-                    if (closeAngelBracket > 0 && count < 0) {
-                        outString.add(inputString.substring(index + 1, closeAngelBracket))
-                        charArray.set(closeAngelBracket, '-')
+                    var closeBracket = inputChar.indexOf(')')
+                    var processedText = inputString.substring(index + 1, closeBracket)
+                    var count = processedText.indexOf('(')
+                    if (closeBracket > 0 && count < 0) {
+                        outString.add(inputString.substring(index + 1, closeBracket))
+                        inputChar.set(closeBracket, '-')
                     }
-                    if (closeAngelBracket > 0 && count > 0) {
-                        charArray.set(closeAngelBracket,'-')
-                        var nextCloseAngelBracket = charArray.indexOf(')')
+                    if (closeBracket > 0 && count > 0) {
+                        inputChar.set(closeBracket,'-')
+                        var nextCloseAngelBracket = inputChar.indexOf(')')
                         outString.add(inputString.substring(index + 1, nextCloseAngelBracket))
-                        charArray.set(nextCloseAngelBracket, '-')
-                        charArray.set(closeAngelBracket,')')
+                        inputChar.set(nextCloseAngelBracket, '-')
+                        inputChar.set(closeBracket,')')
                     }
                 }
-
             }
         return outString.toTypedArray()
     }
