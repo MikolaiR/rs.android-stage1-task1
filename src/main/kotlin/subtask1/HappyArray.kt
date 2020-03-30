@@ -5,13 +5,13 @@ class HappyArray {
     fun convertToHappy(sadArray: IntArray): IntArray {
         var outArray = arrayListOf<Int>()
         sadArray.forEach { outArray.add(it) }
-        var counte: Int = 1
-        while (counte < outArray.size - 1) {
-            if (outArray[counte] > outArray.get(counte - 1) + outArray.get(counte + 1)) {
-                outArray.remove(outArray[counte])
-                counte = 1
+        var count: Int = 1
+        while (count < outArray.size - 1) {
+            if (outArray[count] > outArray.get(count - 1) + outArray.get(count + 1)) {
+                outArray.remove(outArray[count])
+                count = 1
             }
-            counte++
+            count++
         }
         return outArray.toIntArray()
     }
